@@ -5,59 +5,26 @@ const mobileNav = document.getElementById('mobile-nav');
 
 let autoSlideInterval;
 
-const modal = document.getElementById('myModal');
-const modalIds = ['vxe-modal', 'asus-modal', 'as-modal'];
+const descPanels = document.querySelectorAll('.desc-panel');
 
-function openModal(modalId) {
-    // Hide all modal content panels first
-    modalIds.forEach(id => {
-        document.getElementById(id).style.display = 'none';
+function showDescription(index) {
+    descPanels.forEach(panel => {
+        panel.classList.remove('active', 'visible');
     });
 
-    // Show the one that was clicked
-    document.getElementById(modalId).style.display = 'block';
+    const target = descPanels[index];
+    if (!target) return;
 
-    // Show the modal overlay
-    modal.style.display = 'block';
-
-    // Pause the carousel while modal is open
-    stopAutoSlide();
+    target.classList.add('active');
+    target.getBoundingClientRect();
+    target.classList.add('visible');
 }
 
-function closeModal() {
-    modal.style.display = 'none';
-    startAutoSlide();
-}
-
-function setupModalListeners() {
-    // Wire each view more button to its matching modal panel
-    const viewMoreBtns = document.querySelectorAll('.view-more-btn');
-    viewMoreBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const modalId = btn.getAttribute('data-modal');
-            openModal(modalId);
-        });
-    });
-
-    // Close buttons inside each modal panel
-    document.querySelectorAll('.close').forEach(closeBtn => {
-        closeBtn.addEventListener('click', closeModal);
-    });
-
-    // Click outside the modal content to close
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-    });
-
-    // Escape key to close
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && modal.style.display === 'block') closeModal();
-    });
-}
 
 function updateSlide() {
     if (!slideContainer) return;
     slideContainer.style.transform = `translateX(-${currentIndex * 33.333}%)`;
+    showDescription(currentIndex);
 }
 
 function nextSlide() {
@@ -72,7 +39,7 @@ function prevSlide() {
 
 function startAutoSlide() {
     stopAutoSlide();
-    autoSlideInterval = setInterval(nextSlide, 5500);
+    autoSlideInterval = setInterval(nextSlide, 8000);
 }
 
 function stopAutoSlide() {
@@ -115,12 +82,11 @@ function setupEventListeners() {
     window.addEventListener('resize', () => {
         if (window.innerWidth > 768) closeMobileNav();
     });
-
-    setupModalListeners();
 }
 
 function initCarousel() {
     setupEventListeners();
+    showDescription(0);
     startAutoSlide();
 }
 

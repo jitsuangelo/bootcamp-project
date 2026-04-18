@@ -225,8 +225,23 @@ span {
   letter-spacing: 1.5px;
   text-transform: uppercase;
   cursor: pointer;
-  transition: transform 0.2s, background 0.2s;
+  transition: transform 0.2s, color 0.2s;
 }
+
+.shop-btn {
+  background: #e5ff00;
+  color: #0a0a0a;
+  border: none;
+  padding: 14px 32px;
+  font-family: 'Barlow', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.2s, color 0.2s;
+}
+
 
 .shop-btn:hover {
   transform: translateY(-2px);
@@ -245,9 +260,11 @@ span {
   text-transform: uppercase;
   cursor: pointer;
   transition: border-color 0.2s, color 0.2s;
+  transition: transform 0.2s, color 0.2s;
 }
 
 .explore-btn:hover {
+  transform: translateY(-2px);
   border-color: #fcf8f8;
   color: #e5ff00;
 }
